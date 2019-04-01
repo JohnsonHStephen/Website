@@ -1,0 +1,24 @@
+{
+  "name": "my-website",
+  "version": "0.0.1",
+  "description": "This will be my main website and portfolio",
+  "main": "server/server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "react": "^16.8.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnsonHStephen/Website.git"
+  },
+  "author": "Stephen Johnson",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/JohnsonHStephen/Website/issues"
+  },
+  "homepage": "https://github.com/JohnsonHStephen/Website#readme"
+}
