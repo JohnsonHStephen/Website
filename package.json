@@ -5,9 +5,8 @@
   "main": "server/server.js",
   "dependencies": {
     "express": "^4.16.4",
-    "react": "^16.8.6"
+    "express-handlebars": "^3.0.2"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node server/server.js"
   },
@@ -20,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/JohnsonHStephen/Website/issues"
   },
-  "homepage": "https://github.com/JohnsonHStephen/Website#readme"
+  "homepage": "https://github.com/JohnsonHStephen/Website#readme",
+  "keywords": []
 }

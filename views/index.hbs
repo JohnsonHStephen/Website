@@ -1,0 +1,13 @@
+<!-- enables react -->
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<!-- react compnent (when finallizing move copy of the js file into src folder
+then execute: npm install babel-cli@6 babel-preset-react-app@3
+then: npx babel --watch src --out-dir . --presets react-app/prod
+this will generate the sime name js file in the main folder, this new file
+is a precompiled JSX into JS file and therfore the type property, the
+linked babel script can be removed, and the npm babel modules) -->
+<div id='root'></div>
+<script type='text/babel' src="/javascripts/index.js"></script>
