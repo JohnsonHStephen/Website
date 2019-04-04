@@ -1,6 +1,7 @@
 const express   = require('express');
 const router    = express.Router();
 const mongoose  = require('mongoose');
+let crypto      = require('crypto');
 
 const Project   = require('./../models/project');
 
@@ -37,6 +38,7 @@ router.post('/update', function(req, res) {
     request.get(options, function(error, response, body) {
       if(error) {
         console.log("Error reading from GitHub API: ", error);
+        res.status(500).end();
       } else {
         let Project = require('./models/project');
 
@@ -44,6 +46,7 @@ router.post('/update', function(req, res) {
         Project.deleteMany({}, function(e, result){
           if(e) {
             console.log("Error clearing mongodb myWebsite: ", e);
+            res.status(500).end();
           } else {
             // console.log("Clearing old projects.");
             for(var project of JSON.parse(body)) {
@@ -59,8 +62,10 @@ router.post('/update', function(req, res) {
                 temp.save(function(e, result) {
                   if(e) {
                     console.log("Error saving to mongodb myWebsite: ", e);
+                    res.status(500).end();
                   } else {
                     // console.log("inserted", temp);
+                    res.status(200).end();
                   }
                 });
               }

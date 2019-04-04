@@ -3,6 +3,7 @@ const hbs       = require('express-handlebars');
 const path      = require('path');
 const mongoose  = require('mongoose');
 const request   = require('request');
+const bodyParser  = require('body-parser');
 
 
 mongoose.connect('mongodb://localhost:27017/myWebsite', { useNewUrlParser: true, useCreateIndex: true, autoIndex: false });
@@ -11,7 +12,7 @@ const PORT      = process.env.PORT || 3000;
 const app       = express();
 
 
-
+app.use(bodyParser.json({ type: 'application/json' }));
 app.use(express.static(__dirname + '/../client/public'));
 
 app.set('views', path.join(__dirname, '/../client/views'));

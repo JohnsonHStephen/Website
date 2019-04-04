@@ -4,6 +4,8 @@
   "description": "This will be my main website and portfolio",
   "main": "server/server.js",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "mongoose": "^5.4.21",
