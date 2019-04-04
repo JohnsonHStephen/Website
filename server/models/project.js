@@ -4,11 +4,6 @@ var projectSchema  = mongoose.Schema({
     name: {
       type: String
     },
-    Id: {
-      type: Number,
-      index: true,
-      unique: true
-    },
     gitUrl: {
       type: String
     },
