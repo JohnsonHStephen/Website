@@ -19,14 +19,3 @@ div .project-name {
 div .card-body {
   padding-top: 0.5rem;
 }
-
-img .icon {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-image .portrait {
-  width: -webkit-calc(25% - 6rem);
-  width: -moz-calc(25% - 6rem);
-  width: calc(25% - 6rem);
-}
