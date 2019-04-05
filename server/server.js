@@ -1,8 +1,8 @@
-const express   = require('express');
-const hbs       = require('express-handlebars');
-const path      = require('path');
-const mongoose  = require('mongoose');
-const request   = require('request');
+const express     = require('express');
+const hbs         = require('express-handlebars');
+const path        = require('path');
+const mongoose    = require('mongoose');
+const request     = require('request');
 const bodyParser  = require('body-parser');
 
 
