@@ -35,7 +35,7 @@ router.post('/update', function(req, res) {
       }
     };
 
-    request.get(options, function(error, response, body) {
+    req.get(options, function(error, res, body) {
       if(error) {
         console.log("Error reading from GitHub API: ", error);
         res.status(500).end();
