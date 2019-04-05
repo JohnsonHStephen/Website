@@ -3,7 +3,7 @@
   {{#each projects}}
   <div class="col-md-4">
     <div class="card">
-      <div><a href="/portfolio/projects/{{name}}"><img class="card-img-top" src="{{imagePath}}"></a></div>
+      <div><a href="/portfolio/projects/{{name}}"><img class="card-img-top" alt="" src="{{imagePath}}"></a></div>
       <div class="card-body">
         <div class="project-name">{{name}}</div>
         <div class="project-description">{{description}}</div>
@@ -16,7 +16,7 @@
 {{else}}
 <div class="col-md-12 text-center">
   <div class="white-box pad20 mar20 border-around">
-    no project available
+    no projects available
   </div>
 </div>
 {{/if}}

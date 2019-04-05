@@ -16,11 +16,14 @@ app.use(bodyParser.json({ type: 'application/json' }));
 app.use(express.static(__dirname + '/../client/public'));
 
 app.set('views', path.join(__dirname, '/../client/views'));
+//using the express handlebars template mechanism
 app.engine('hbs', hbs({extname: 'hbs',
 defaultLayout: 'mainLayout',
 helpers: {
+  //takes the 2 values compares them and returns the whenTrue argument when they are equal
+  //  returns the whenFalse when they are not and a blanck string when they are not equal
+  //  and whenFalse is not defined
   compare: function(lvalue, rvalue, whenTrue, whenFalse) {
-
     if (arguments.length < 4) {
       throw new Error("Handlerbars Helper 'compare' needs 3 parameters");
     }
@@ -45,47 +48,50 @@ app.listen(PORT, err => {
   if(err) {
     console.log(err);
   } else {
-    console.log(`Server listening on port: ${PORT}`);
     console.log(`Open at:`);
-    console.log(`http://localhost:3000`);
+    console.log(`http://johnsonhstephen.com`);
 
+    //update the database when the server is started
     var options = {
       url: 'https://api.github.com/orgs/StephenHJohnson/repos',
       headers: {
-        'User-Agent': 'JohnsonHStephen'
+        'User-Agent': 'JohnsonHStephen',
+        'Accept': 'application/vnd.github.v3.full+json'
       }
     };
 
+    //getting all the current public repositories on github
     request.get(options, function(error, response, body) {
       if(error) {
         console.log("Error reading from GitHub API: ", error);
       } else {
         let Project = require('./models/project');
 
-        // console.log(JSON.parse(body));
+        //emptying the database of any currently saved projects
         Project.deleteMany({}, function(e, result){
           if(e) {
             console.log("Error clearing mongodb myWebsite: ", e);
           } else {
             console.log("Clearing old projects.");
-            for(var project of JSON.parse(body)) {
-              if(project.language === "JavaScript" && project.name !== "Website") {
-                var temp = new Project({
-                  name: project.name,
-                  gitUrl: project.html_url,
-                  description: project.description,
-                  updated: project.pushed_at,
-                  imagePath: project.owner.avatar_url
-                });
 
-                temp.save(function(e, result) {
-                  if(e) {
-                    console.log("Error saving to mongodb myWebsite: ", e);
-                  } else {
-                    console.log("inserted", temp);
-                  }
-                });
-              }
+            //loops through each project imported from GitHub
+            for(var project of JSON.parse(body)) {
+              //saves the each project to the database
+              var temp = new Project({
+                name: project.name,
+                gitUrl: project.html_url,
+                description: project.description,
+                updated: project.pushed_at,
+                imagePath: "https://cdn.jsdelivr.net/gh/StephenHJohnson/" + project.name + "@master/img.jpeg"
+              });
+
+              temp.save(function(e, result) {
+                if(e) {
+                  console.log("Error saving to mongodb myWebsite: ", e);
+                } else {
+                  console.log("inserted", temp);
+                }
+              });
             }
           }
         });
