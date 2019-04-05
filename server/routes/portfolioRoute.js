@@ -24,8 +24,8 @@ router.get('/projects/:name', function(req, res) {
 });
 
 router.post('/update', function(req, res) {
-  console.log("updating shit");
-  let sig = "sha1=" + crypto.createHmac('sha1', secret).update(chunk.toString()).digest('hex');
+  console.log("updating projects");
+  let sig = "sha1=" + crypto.createHmac('sha1', secret).update(JSON.stringify(req.body)).digest('hex');
 
   if (req.headers['x-hub-signature'] == sig) {
     var options = {

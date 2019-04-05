@@ -8,7 +8,7 @@ const bodyParser  = require('body-parser');
 
 mongoose.connect('mongodb://localhost:27017/myWebsite', { useNewUrlParser: true, useCreateIndex: true, autoIndex: false });
 
-const PORT      = process.env.PORT || 3000;
+const PORT      = process.env.PORT || 80;
 const app       = express();
 
 
