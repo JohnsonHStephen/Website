@@ -11,7 +11,7 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "sudo node server/server.js"
+    "start": "sudo nohup node server/server.js &"
   },
   "repository": {
     "type": "git",
