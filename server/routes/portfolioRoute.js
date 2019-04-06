@@ -16,13 +16,13 @@ router.get('/', function(req, res) {
       e.status = 406; next(e);
     } else {
       console.log("projects: ", projects);
-      res.render('portfolio', {title: 'Portfolio', projects: projects, time: timestamp});
+      res.render('portfolio', {title: 'Portfolio', projects: projects});
     }
   });
 });
 
 router.get('/projects/:name', function(req, res) {
-  res.render('project', {title: req.params.name, name: req.params.name});
+  res.render('project', {title: req.params.name, name: req.params.name, version: timestamp});
 });
 
 //called by GitHub webhook triggered by changes to the repositories
