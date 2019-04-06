@@ -1,10 +1,13 @@
 const express   = require('express');
 const router    = express.Router();
 const mongoose  = require('mongoose');
-let crypto      = require('crypto');
+const crypto    = require('crypto');
 const request   = require('request');
 
 const Project   = require('./../models/project');
+
+let date        = new Date();
+let timestamp   = date.getTime();
 
 const secret    = "W1i8BrKNrKaQSMngG$Nh$aqB50&9Ts&w0&JPZKpY99#Gd5cXT3sC9695^1CTd*V1hjGNszWcB1C^jxHptKJlIiCiu&QbojqwBRd";
 
@@ -28,9 +31,6 @@ router.get('/projects/:name', function(req, res) {
 //called by GitHub webhook triggered by changes to the repositories
 router.post('/update', function(req, res) {
   console.log("updating projects");
-
-  //updateing all of the github files by changing the version
-  ++timestamp;
 
   //creating a hashed version of the secret key to compare with given key
   let sig = "sha1=" + crypto.createHmac('sha1', secret).update(JSON.stringify(req.body)).digest('hex');
@@ -60,6 +60,9 @@ router.post('/update', function(req, res) {
             console.log("Clearing old projects.");
             //loop through each repository from github
             for(var project of JSON.parse(body)) {
+              //updateing all of the github files by changing the version
+              ++timestamp;
+
               //creating a new database item from the gihub info
               var temp = new Project({
                 name: project.name,
