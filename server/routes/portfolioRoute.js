@@ -6,9 +6,6 @@ const request   = require('request');
 
 const Project   = require('./../models/project');
 
-let date        = new Date();
-let timestamp   = date.getTime();
-
 const secret    = "W1i8BrKNrKaQSMngG$Nh$aqB50&9Ts&w0&JPZKpY99#Gd5cXT3sC9695^1CTd*V1hjGNszWcB1C^jxHptKJlIiCiu&QbojqwBRd";
 
 router.get('/', function(req, res) {
@@ -25,7 +22,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/projects/:name', function(req, res) {
-  res.render('project', {title: req.params.name, name: req.params.name, version: timestamp});
+  res.render('project', {title: req.params.name, name: req.params.name});
 });
 
 //called by GitHub webhook triggered by changes to the repositories
@@ -60,8 +57,6 @@ router.post('/update', function(req, res) {
             console.log("Clearing old projects.");
             //loop through each repository from github
             for(var project of JSON.parse(body)) {
-              //updateing all of the github files by changing the version
-              ++timestamp;
 
               //creating a new database item from the gihub info
               var temp = new Project({
@@ -69,7 +64,7 @@ router.post('/update', function(req, res) {
                 gitUrl: project.html_url,
                 description: project.description,
                 updated: project.pushed_at,
-                imagePath: "https://cdn.jsdelivr.net/gh/StephenHJohnson/" + project.name + "@" + timestamp + "/img.jpeg"
+                imagePath: "https://cdn.jsdelivr.net/gh/StephenHJohnson/" + project.name + "@latest/img.jpeg"
               });
 
               //saving the project to the database
