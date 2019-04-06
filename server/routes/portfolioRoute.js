@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
       e.status = 406; next(e);
     } else {
       console.log("projects: ", projects);
-      res.render('portfolio', {title: 'Portfolio', projects: projects});
+      res.render('portfolio', {title: 'Portfolio', projects: projects, time: timestamp});
     }
   });
 });
@@ -28,6 +28,9 @@ router.get('/projects/:name', function(req, res) {
 //called by GitHub webhook triggered by changes to the repositories
 router.post('/update', function(req, res) {
   console.log("updating projects");
+
+  //updateing all of the github files by changing the version
+  ++timestamp;
 
   //creating a hashed version of the secret key to compare with given key
   let sig = "sha1=" + crypto.createHmac('sha1', secret).update(JSON.stringify(req.body)).digest('hex');
@@ -63,7 +66,7 @@ router.post('/update', function(req, res) {
                 gitUrl: project.html_url,
                 description: project.description,
                 updated: project.pushed_at,
-                imagePath: "https://cdn.jsdelivr.net/gh/StephenHJohnson/" + project.name + "@master/img.jpeg"
+                imagePath: "https://cdn.jsdelivr.net/gh/StephenHJohnson/" + project.name + "@" + timestamp + "/img.jpeg"
               });
 
               //saving the project to the database

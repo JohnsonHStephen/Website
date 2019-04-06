@@ -11,6 +11,9 @@ mongoose.connect('mongodb://localhost:27017/myWebsite', { useNewUrlParser: true,
 const PORT      = process.env.PORT || 80;
 const app       = express();
 
+let date        = new Date();
+let timestamp   = date.getTime();
+
 
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(express.static(__dirname + '/../client/public'));
@@ -82,7 +85,7 @@ app.listen(PORT, err => {
                 gitUrl: project.html_url,
                 description: project.description,
                 updated: project.pushed_at,
-                imagePath: "https://cdn.jsdelivr.net/gh/StephenHJohnson/" + project.name + "@master/img.jpeg"
+                imagePath: "https://cdn.jsdelivr.net/gh/StephenHJohnson/" + project.name + "@" + timestamp + "/img.jpeg"
               });
 
               temp.save(function(e, result) {
